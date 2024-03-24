@@ -14,7 +14,6 @@ import service.ThuocTinhService;
 import model.SanPham;
 import service.SanPhamServices;
 
-
 public class itf_SanPham extends javax.swing.JInternalFrame {
 
     DefaultTableModel model = new DefaultTableModel();
@@ -43,6 +42,8 @@ public class itf_SanPham extends javax.swing.JInternalFrame {
         loadCboThuongHieu(ctsps.loadCboThuongHieu());
         loadCboXuatXu(ctsps.loadCboXuatxu());
         checkLoadTableThuocTinh();
+        clearForm();
+
     }
 
     private void loadTableThuocTinh(List<ThuocTinh> listtt) {
@@ -51,6 +52,21 @@ public class itf_SanPham extends javax.swing.JInternalFrame {
         for (ThuocTinh thuocTinh : listtt) {
             model1.addRow(new Object[]{thuocTinh.getId(), thuocTinh.getTen(), thuocTinh.trangthai()});
         }
+    }
+
+    private void eNabeldBtn() {
+        btnSuaSP.setEnabled(false);
+
+    }
+
+    private void clearForm() {
+        txtMaSanPham.setText("");
+        txtTenSanPham.setText("");
+        buttonGroup2.clearSelection();
+        cbo1.setSelectedIndex(0);
+        txtTimKiem.setText("");
+        eNabeldBtn();
+
     }
 
     private void checkLoadTableThuocTinh() {
@@ -163,6 +179,7 @@ public class itf_SanPham extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Không được để trống mã sản phẩm");
             return false;
         }
+        eNabeldBtn();
         if (txtTenSanPham.getText().trim().equals("")) {
             JOptionPane.showMessageDialog(this, ":Không được để trống tên sản phẩm");
             return false;
@@ -258,7 +275,6 @@ public class itf_SanPham extends javax.swing.JInternalFrame {
         }
     }
 
-
     private void mouseClickCTSP(int index) {
 
         String maSP = tblChiTietSanPham.getValueAt(index, 1).toString();
@@ -338,8 +354,6 @@ public class itf_SanPham extends javax.swing.JInternalFrame {
         ctsps.updateChiTietSP(id, sanpham, soluong, gia, mausac, kichthuoc, thuonghieu, xuatxu, trangthai);
 
     }
-
-
 
     @SuppressWarnings("unchecked")
 
@@ -523,6 +537,11 @@ public class itf_SanPham extends javax.swing.JInternalFrame {
 
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder("Tìm kiếm"));
 
+        txtTimKiem.addCaretListener(new javax.swing.event.CaretListener() {
+            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+                txtTimKiemCaretUpdate(evt);
+            }
+        });
         txtTimKiem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtTimKiemActionPerformed(evt);
@@ -552,7 +571,7 @@ public class itf_SanPham extends javax.swing.JInternalFrame {
 
         jPanel9.setBorder(javax.swing.BorderFactory.createTitledBorder("Trạng thái"));
 
-        cbo1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbo1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả", "Hoạt động", "Không hoạt động" }));
         cbo1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 cbo1MouseClicked(evt);
@@ -614,7 +633,7 @@ public class itf_SanPham extends javax.swing.JInternalFrame {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, true, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -817,6 +836,12 @@ public class itf_SanPham extends javax.swing.JInternalFrame {
 
         jLabel4.setText("Từ");
 
+        txtTienMin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTienMinActionPerformed(evt);
+            }
+        });
+
         jLabel7.setText("Đến");
 
         btnSearchGia.setText("Search");
@@ -932,13 +957,32 @@ public class itf_SanPham extends javax.swing.JInternalFrame {
             new String [] {
                 "ID SPCT", "Mã SP", "Số lượng", "Giá", "Màu sắc ", "Kích thước", "Thương hiệu", "Xuất Xứ", "Trạng thái"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tblChiTietSanPham.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblChiTietSanPhamMouseClicked(evt);
             }
         });
         jScrollPane7.setViewportView(tblChiTietSanPham);
+        if (tblChiTietSanPham.getColumnModel().getColumnCount() > 0) {
+            tblChiTietSanPham.getColumnModel().getColumn(0).setResizable(false);
+            tblChiTietSanPham.getColumnModel().getColumn(1).setResizable(false);
+            tblChiTietSanPham.getColumnModel().getColumn(2).setResizable(false);
+            tblChiTietSanPham.getColumnModel().getColumn(3).setResizable(false);
+            tblChiTietSanPham.getColumnModel().getColumn(4).setResizable(false);
+            tblChiTietSanPham.getColumnModel().getColumn(5).setResizable(false);
+            tblChiTietSanPham.getColumnModel().getColumn(6).setResizable(false);
+            tblChiTietSanPham.getColumnModel().getColumn(7).setResizable(false);
+            tblChiTietSanPham.getColumnModel().getColumn(8).setResizable(false);
+        }
 
         cboMaSP.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -1325,13 +1369,26 @@ public class itf_SanPham extends javax.swing.JInternalFrame {
             new String [] {
                 "ID", "Tên", "Trạng thái"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tblThuocTinh.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblThuocTinhMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(tblThuocTinh);
+        if (tblThuocTinh.getColumnModel().getColumnCount() > 0) {
+            tblThuocTinh.getColumnModel().getColumn(0).setResizable(false);
+            tblThuocTinh.getColumnModel().getColumn(1).setResizable(false);
+            tblThuocTinh.getColumnModel().getColumn(2).setResizable(false);
+        }
 
         btnThemThuocTinh.setText("Thêm");
         btnThemThuocTinh.addActionListener(new java.awt.event.ActionListener() {
@@ -1501,7 +1558,8 @@ public class itf_SanPham extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimKiemActionPerformed
-        // TODO add your handling code here:
+
+
     }//GEN-LAST:event_txtTimKiemActionPerformed
 
     private void cbo1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbo1MouseClicked
@@ -1509,14 +1567,26 @@ public class itf_SanPham extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cbo1MouseClicked
 
     private void cbo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbo1ActionPerformed
-        // TODO add your handling code here:
+        String trangThai = (String) cbo1.getSelectedItem();
+        if (trangThai.equals("Tất cả")) {
+            loadTableSp(this.spsv.getListSP());
+        } else if (trangThai.equals("Hoạt động")) {
+            loadTableSp(this.spsv.getListSP1());
+
+        } else {
+            loadTableSp(this.spsv.getListSP2());
+
+        }
+        
+
 
     }//GEN-LAST:event_cbo1ActionPerformed
 
     private void tblSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSanPhamMouseClicked
         int index = tblSanPham.getSelectedRow();
         loadFormSanPham(index);
-        
+        btnSuaSP.setEnabled(true);
+
     }//GEN-LAST:event_tblSanPhamMouseClicked
 
     private void btnQuayLaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuayLaiActionPerformed
@@ -1535,6 +1605,8 @@ public class itf_SanPham extends javax.swing.JInternalFrame {
                 loadTableSp(this.spsv.getListSP());
             }
         }
+        clearForm();
+
     }//GEN-LAST:event_btnThemSPActionPerformed
 
     private void btnThemCTSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemCTSPActionPerformed
@@ -1553,7 +1625,7 @@ public class itf_SanPham extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnClearThuocTinhActionPerformed
 
     private void btnClearSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearSPActionPerformed
-
+        clearForm();
     }//GEN-LAST:event_btnClearSPActionPerformed
 
     private void btnClearCTSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearCTSPActionPerformed
@@ -1584,13 +1656,13 @@ public class itf_SanPham extends javax.swing.JInternalFrame {
 
     private void btnSuaSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaSPActionPerformed
         if (validateSanPham()) {
-            if (this.spsv.updateSP(loadFormSanPham(tblSanPham.getSelectedRow()+1), readFormSanPham())>0) {
-                JOptionPane.showMessageDialog(this,loadFormSanPham(tblSanPham.getSelectedRow()) );
+            if (spsv.updateSP((int) tblSanPham.getValueAt(tblSanPham.getSelectedRow(), 0), readFormSanPham()) > 0) {
+
                 JOptionPane.showMessageDialog(this, "Cập nhật thành công");
                 loadTableSp(this.spsv.getListSP());
             }
         }
-
+        clearForm();
     }//GEN-LAST:event_btnSuaSPActionPerformed
 
     private void btnSuaCTSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaCTSPActionPerformed
@@ -1691,6 +1763,24 @@ public class itf_SanPham extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_rdConHangActionPerformed
 
+    private void txtTimKiemCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtTimKiemCaretUpdate
+
+        
+        String getvaluesCbo = cbo1.getSelectedItem().toString();
+        if (getvaluesCbo.equalsIgnoreCase("Tất cả")) {
+            loadTableSp(this.spsv.findAllSanPham(txtTimKiem.getText()));
+        } else if (getvaluesCbo.equalsIgnoreCase("Hoạt động")) {
+            loadTableSp(this.spsv.findSanPham(1, txtTimKiem.getText()));
+        } else {
+            loadTableSp(this.spsv.findSanPham(0, txtTimKiem.getText()));
+
+        }
+
+    }//GEN-LAST:event_txtTimKiemCaretUpdate
+
+    private void txtTienMinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTienMinActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTienMinActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
