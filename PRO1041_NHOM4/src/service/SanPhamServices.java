@@ -40,74 +40,7 @@ public class SanPhamServices {
         }
         return listSP;
     }
-    public List<SanPham> getListSP1() {
-        listSP = new ArrayList<>();
-        sql = "select IdSanPham, Ma,ten,TrangThai,NgayTao,NgaySua from SanPham where TrangThai = 1 ;";
-        try {
-            con = DBConnect.getConnection();
-            ps = con.prepareStatement(sql);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                SanPham sanPham = new SanPham(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getDate(5), rs.getDate(6));
-                listSP.add(sanPham);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return listSP;
-    }
-    public List<SanPham> getListSP2() {
-        listSP = new ArrayList<>();
-        sql = "select IdSanPham, Ma,ten,TrangThai,NgayTao,NgaySua from SanPham where TrangThai = 0 ;";
-        try {
-            con = DBConnect.getConnection();
-            ps = con.prepareStatement(sql);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                SanPham sanPham = new SanPham(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getDate(5), rs.getDate(6));
-                listSP.add(sanPham);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return listSP;
-    }
-   
-     public List<SanPham> findSanPham(int trangThai, String search) {
-        listSP = new ArrayList<>();
-        sql = "  select IdSanPham, Ma,ten,TrangThai,NgayTao,NgaySua from SanPham where TrangThai =? and ten like ? ;";
-        try {
-            con = DBConnect.getConnection();
-            ps = con.prepareStatement(sql);
-            ps.setInt(1, trangThai);
-            ps.setString(2,"%" + search + "%");
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                SanPham sanPham = new SanPham(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getDate(5), rs.getDate(6));
-                listSP.add(sanPham);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return listSP;
-    }
-      public List<SanPham> findAllSanPham(String search) {
-        listSP = new ArrayList<>();
-        sql = "  select IdSanPham, Ma,ten,TrangThai,NgayTao,NgaySua from SanPham where ten like ? ;";
-        try {
-            con = DBConnect.getConnection();
-            ps = con.prepareStatement(sql);
-            ps.setString(1,"%"+ search + "%");
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                SanPham sanPham = new SanPham(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getDate(5), rs.getDate(6));
-                listSP.add(sanPham);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return listSP;
-    }
+    
     public int insertSanPham(SanPham sanPham) {
         int check = -1;
         sql = "insert into SanPham(Ma,Ten,TrangThai) values(?,?,?);";

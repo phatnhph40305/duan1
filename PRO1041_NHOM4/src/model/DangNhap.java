@@ -23,10 +23,11 @@ public class DangNhap {
     public DangNhap() {
     }
     
-    public DangNhap(String tenDN, String matKhau, String chucVu) {
+    public DangNhap(String tenDN, String matKhau, String chucVu,String tenNguoiDung) {
         this.tenDN = tenDN;
         this.matKhau = matKhau;
         this.chucVu = chucVu;
+        this.tenNguoiDung = tenNguoiDung;
     }
 
     public DangNhap(int idNguoiDung, String tenNguoiDung, String maNV, String tenDN, String matKhau, String chucVu, int trangThaiNGuoiDung, Date ngayTao, Date ngaySua) {

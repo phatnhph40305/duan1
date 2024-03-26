@@ -13,10 +13,10 @@ public class DangNhapView extends javax.swing.JFrame {
 
     DangNhapServices dnsv = new DangNhapServices();
     public static String chucVu;
+    public static String tenNd;
 
-    /**
-     * Creates new form DangNhapView
-     */
+    
+    
     public DangNhapView() {
         initComponents();
         this.dispose();
@@ -213,6 +213,7 @@ public class DangNhapView extends javax.swing.JFrame {
 
             for (DangNhap dangNhap : this.dnsv.getListSP()) {
                 if (dangNhap.getTenDN().equals(txtTaiKhoan.getText())) {
+                    tenNd = dangNhap.getTenNguoiDung();
                     chucVu = dangNhap.getChucVu();
                 }
             }

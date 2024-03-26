@@ -35,8 +35,7 @@ public class HoaDonService {
     public List loadTableHoaDon1() {
         List<HoaDon> litshd = new ArrayList<>();
         try {
-            String sql = "select HoaDon.IdHoaDon,KhachHang.Ten,NguoiDung.Ten,HoaDon.TrangThai,HoaDon.NgayTao from HoaDon join KhachHang on HoaDon.IdKhachHang = KhachHang.IdKhachHang join NguoiDung on HoaDon.IdNguoiDung = NguoiDung.IdNguoiDung\n"
-                    + "		where HoaDon.TrangThai = 1";
+            String sql = "select HoaDon.IdHoaDon,KhachHang.Ten,NguoiDung.Ten,HoaDon.TrangThai,HoaDon.NgayTao from HoaDon left join KhachHang on HoaDon.IdKhachHang = KhachHang.IdKhachHang join NguoiDung on HoaDon.IdNguoiDung = NguoiDung.IdNguoiDung where HoaDon.TrangThai = 1";
             Connection con = DBConnect.getConnection();
             PreparedStatement ps = con.prepareStatement(sql);
 
@@ -55,13 +54,13 @@ public class HoaDonService {
     public List loadTableHoaDon2() {
         List<HoaDon> litshd = new ArrayList<>();
         try {
-            String sql = "select IdHoaDon,TrangThai,NgayTao from HoaDon where TrangThai = 2";
+            String sql = "select HoaDon.IdHoaDon,KhachHang.Ten,NguoiDung.Ten,HoaDon.TrangThai,HoaDon.NgayTao from HoaDon left join KhachHang on HoaDon.IdKhachHang = KhachHang.IdKhachHang join NguoiDung on HoaDon.IdNguoiDung = NguoiDung.IdNguoiDung where HoaDon.TrangThai = 2";
             Connection con = DBConnect.getConnection();
             PreparedStatement ps = con.prepareStatement(sql);
 
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                HoaDon hd = new HoaDon(rs.getInt(1), "", "", rs.getInt(2), rs.getString(3));
+                HoaDon hd = new HoaDon(rs.getInt(1),"", rs.getString(3),rs.getInt(4),rs.getString(5));
                 litshd.add(hd);
             }
             return litshd;
@@ -111,16 +110,17 @@ public class HoaDonService {
             return null;
         }
     }
-      public List findDataTableCTSP(String th) {
+
+    public List findDataTableCTSP(String th) {
         List<ChiTietSanPham> litsctsp = new ArrayList<>();
         try {
-            String sql = " select ChiTietSanPham.IdCTSP,SanPham.Ma,SanPham.Ten,ChiTietSanPham.SoLuong,MauSac.Ten,KichThuoc.Ten,ThuongHieu.TenThuongHieu,XuatXu.Ten,ChiTietSanPham.DonGia\n" +
-"                                       from ChiTietSanPham join SanPham on ChiTietSanPham.IdSanPham = SanPham.IdSanPham\n" +
-"                                       join XuatXu on XuatXu.IdXuatXu = ChiTietSanPham.IdXuatXu join ThuongHieu on ThuongHieu.IdThuongHieu = ChiTietSanPham.IdThuongHieu\n" +
-"                                      join KichThuoc on KichThuoc.IdKichThuoc = ChiTietSanPham.IdKichThuoc join MauSac on MauSac.IdMauSac = ChiTietSanPham.IdMauSac where ChiTietSanPham.TrangThai = 1 and ThuongHieu.TenThuongHieu like ?";
+            String sql = " select ChiTietSanPham.IdCTSP,SanPham.Ma,SanPham.Ten,ChiTietSanPham.SoLuong,MauSac.Ten,KichThuoc.Ten,ThuongHieu.TenThuongHieu,XuatXu.Ten,ChiTietSanPham.DonGia\n"
+                    + "                                       from ChiTietSanPham join SanPham on ChiTietSanPham.IdSanPham = SanPham.IdSanPham\n"
+                    + "                                       join XuatXu on XuatXu.IdXuatXu = ChiTietSanPham.IdXuatXu join ThuongHieu on ThuongHieu.IdThuongHieu = ChiTietSanPham.IdThuongHieu\n"
+                    + "                                      join KichThuoc on KichThuoc.IdKichThuoc = ChiTietSanPham.IdKichThuoc join MauSac on MauSac.IdMauSac = ChiTietSanPham.IdMauSac where ChiTietSanPham.TrangThai = 1 and ThuongHieu.TenThuongHieu like ?";
             Connection con = DBConnect.getConnection();
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setString(1, th+"%");
+            ps.setString(1, th + "%");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 ChiTietSanPham ctsp = new ChiTietSanPham(rs.getInt(1),
@@ -248,7 +248,23 @@ public class HoaDonService {
             ps.setInt(3, idhd);
 
             ps.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Thanh toán thành công");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Không có khách hàng này");
+            return;
+        }
+    }
+
+    public void thanhtoantHoaDon1(int idnv, int idhd) {
+        try {
+            String sql = "update HoaDon \n"
+                    + "set IdNguoiDung = ?,NgayMuaHang = GETDATE(),TrangThai = 1 where IdHoaDon = ?";
+            Connection con = DBConnect.getConnection();
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            ps.setInt(1, idnv);
+            ps.setInt(2, idhd);
+
+            ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -292,19 +308,21 @@ public class HoaDonService {
         }
     }
 
-    public void setTrangthaiHuyHD(int id) {
+    public void setTrangthaiHuyHD(int id, int idnguoidung) {
         try {
-            String sql = "update HoaDon set TrangThai = 2 where IdHoaDon = ?";
+            String sql = "update HoaDon set idnguoidung=?,TrangThai = 2 where IdHoaDon = ?";
             Connection con = DBConnect.getConnection();
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, id);
+            ps.setInt(2, id);
+            ps.setInt(1, idnguoidung);
+
             ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
-    public void setHDCT(int id){
+
+    public void setHDCT(int id) {
         try {
             String sql = "update HoaDonChiTiet set IdCTSP = null,SoLuong = null,DonGia = null where IDHoaDon = ?";
             Connection con = DBConnect.getConnection();
@@ -314,9 +332,10 @@ public class HoaDonService {
             JOptionPane.showMessageDialog(null, "Hủy thành công");
         } catch (Exception e) {
             e.printStackTrace();
-        }   
+        }
     }
-      public void setHDCT1(int id){
+
+    public void setHDCT1(int id) {
         try {
             String sql = "update HoaDonChiTiet set IdCTSP = null,SoLuong = null,DonGia = null where IdCTSP = ?";
             Connection con = DBConnect.getConnection();
@@ -325,6 +344,6 @@ public class HoaDonService {
             ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
-        }   
+        }
     }
 }
