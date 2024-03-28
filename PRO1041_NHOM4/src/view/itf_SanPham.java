@@ -205,17 +205,20 @@ public class itf_SanPham extends javax.swing.JInternalFrame {
         return new SanPham(txtMaSanPham.getText(), txtTenSanPham.getText(), trangThai);
     }
 
-    public int loadFormSanPham(int index) {
-        txtMaSanPham.setText(this.spsv.getListSP().get(index).getMaSP());
-        txtTenSanPham.setText(this.spsv.getListSP().get(index).getTenSp());
-        int trangThai = this.spsv.getListSP().get(index).getTrangThai();
-        if (trangThai == 1) {
+    public void loadFormSanPham(int index) {
+        String maSP = tblSanPham.getValueAt(index, 1).toString();
+        String tenSP = tblSanPham.getValueAt(index, 2).toString();
+        String trangThai = tblSanPham.getValueAt(index, 3).toString();
+        if (trangThai.equalsIgnoreCase("Hoạt động")) {
             rdConHang.setSelected(true);
         } else {
             rdHetHang.setSelected(true);
 
         }
-        return this.spsv.getListSP().get(index).getIdSP();
+        txtMaSanPham.setText(maSP);
+        txtTenSanPham.setText(tenSP);
+        
+
     }
 
     private void loadTableCTSP(List<ChiTietSanPham> listctsp) {
@@ -1577,7 +1580,6 @@ public class itf_SanPham extends javax.swing.JInternalFrame {
             loadTableSp(this.spsv.getListSP2());
 
         }
-        
 
 
     }//GEN-LAST:event_cbo1ActionPerformed
@@ -1765,7 +1767,6 @@ public class itf_SanPham extends javax.swing.JInternalFrame {
 
     private void txtTimKiemCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtTimKiemCaretUpdate
 
-        
         String getvaluesCbo = cbo1.getSelectedItem().toString();
         if (getvaluesCbo.equalsIgnoreCase("Tất cả")) {
             loadTableSp(this.spsv.findAllSanPham(txtTimKiem.getText()));
