@@ -21,13 +21,13 @@ public class DangNhapServices {
 
     public List<DangNhap> getListSP() {
         listDangNhap = new ArrayList<>();
-        sql = "select TenDangNhap,MatKhau,ChucVu from NguoiDung;";
+        sql = "select TenDangNhap,MatKhau,ChucVu,Ten from NguoiDung;";
         try {
             con = DBConnect.getConnection();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-                DangNhap dangNhap = new DangNhap(rs.getString(1), rs.getString(2), rs.getString(3));
+                DangNhap dangNhap = new DangNhap(rs.getString(1), rs.getString(2), rs.getString(3),rs.getString(4));
                 listDangNhap.add(dangNhap);
             }
         } catch (Exception e) {

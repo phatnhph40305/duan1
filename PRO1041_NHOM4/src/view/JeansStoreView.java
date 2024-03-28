@@ -16,6 +16,7 @@ public class JeansStoreView extends javax.swing.JFrame {
     public JeansStoreView() {
         initComponents();
         this.dispose();
+        
         setSize(1400, 800);
         this.setLocationRelativeTo(null);
         chucVu = DangNhapView.chucVu;
@@ -554,10 +555,15 @@ public class JeansStoreView extends javax.swing.JFrame {
 
     private void pnlThongKeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlThongKeMouseClicked
         // TODO add your handling code here:
-        onClickMenu(pnlThongKe);
+        if(check){
+            onClickMenu(pnlThongKe);
         itf_ThongKe thongKe = new itf_ThongKe();
         jdpMain.removeAll();
         jdpMain.add(thongKe).setVisible(true);
+        }else{
+            JOptionPane.showMessageDialog(this, "bạn không đủ quyền");
+        }
+                
     }//GEN-LAST:event_pnlThongKeMouseClicked
 
     private void pnlNhanVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlNhanVienMouseClicked
