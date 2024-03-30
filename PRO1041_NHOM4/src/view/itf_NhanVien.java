@@ -14,7 +14,7 @@ import service.NguoiDungServices;
 public class itf_NhanVien extends javax.swing.JInternalFrame {
 
     private DefaultTableModel tblModel = new DefaultTableModel();
-    
+
     public itf_NhanVien() {
         initComponents();
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
@@ -43,8 +43,21 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
         }
     }
 
-    public void loadTableNv2() {
-
+    public void loadTableNv2(List<NguoiDung> list) {
+        tblModel = (DefaultTableModel) tblNV1.getModel();
+        tblModel.setRowCount(0);
+        for (NguoiDung nguoiDung : list) {
+            tblModel.addRow(new Object[]{
+                nguoiDung.getMaNV(),
+                nguoiDung.getTenDN(),
+                nguoiDung.getMatKhau(),
+                nguoiDung.getTen(),
+                nguoiDung.getChucVu(),
+                nguoiDung.trangThai(),
+                nguoiDung.getNgayTao(),
+                nguoiDung.getNgaySua()
+            });
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -142,17 +155,17 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
 
         tblNV0.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Mã NV", "Tên đăng nhập", "Họ tên", "Mật Khẩu", "Địa chỉ", "SĐT", "CCCD", "Ngày vào làm", "Ảnh"
+                "Mã NV", "Tên đăng nhập", "Mật Khẩu", "Họ tên", "Chức vụ", "Trạng thái", "Ngày vào làm", "Ngày nghỉ việc"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false
+                false, false, false, false, true, true, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -165,6 +178,14 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
             }
         });
         jScrollPane5.setViewportView(tblNV0);
+        if (tblNV0.getColumnModel().getColumnCount() > 0) {
+            tblNV0.getColumnModel().getColumn(1).setResizable(false);
+            tblNV0.getColumnModel().getColumn(2).setResizable(false);
+            tblNV0.getColumnModel().getColumn(3).setResizable(false);
+            tblNV0.getColumnModel().getColumn(4).setResizable(false);
+            tblNV0.getColumnModel().getColumn(5).setResizable(false);
+            tblNV0.getColumnModel().getColumn(7).setResizable(false);
+        }
 
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
         jPanel14.setLayout(jPanel14Layout);
