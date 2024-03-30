@@ -3,15 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/workspace/duan1/duAn1Nhom4/PRO1041_NHOM4/src/view/itf_KhachHang.java</file>
-            <file>file:/D:/workspace/duan1/duAn1Nhom4/PRO1041_NHOM4/src/view/itf_NhanVien.java</file>
-            <file>file:/D:/workspace/duan1/duAn1Nhom4/PRO1041_NHOM4/src/view/JeansStoreView.java</file>
-            <file>file:/D:/workspace/duan1/duAn1Nhom4/PRO1041_NHOM4/src/view/itf_SanPham.java</file>
-            <file>file:/D:/workspace/duan1/duAn1Nhom4/PRO1041_NHOM4/src/service/ChiTietSanPhamService.java</file>
-            <file>file:/D:/workspace/duan1/duAn1Nhom4/PRO1041_NHOM4/src/service/DangNhapServices.java</file>
-            <file>file:/D:/workspace/duan1/duAn1Nhom4/PRO1041_NHOM4/src/service/SanPhamServices.java</file>
-            <file>file:/D:/workspace/duan1/duAn1Nhom4/PRO1041_NHOM4/src/view/itf_DoiMatKhau.java</file>
-            <file>file:/D:/workspace/duan1/duAn1Nhom4/PRO1041_NHOM4/src/view/itf_KhuyenMai.java</file>
+            <file>file:/D:/workspace/duan1/duAn1Nhom4/duan1/PRO1041_NHOM4/src/view/DangNhapView.java</file>
+            <file>file:/D:/workspace/duan1/duAn1Nhom4/duan1/PRO1041_NHOM4/src/view/itf_SanPham.java</file>
+            <file>file:/D:/workspace/duan1/duAn1Nhom4/duan1/PRO1041_NHOM4/src/view/itf_DoiMatKhau.java</file>
+            <file>file:/D:/workspace/duan1/duAn1Nhom4/duan1/PRO1041_NHOM4/src/view/JeansStoreView.java</file>
         </group>
     </open-files>
 </project-private>
