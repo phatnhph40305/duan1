@@ -13,8 +13,9 @@ import service.NguoiDungServices;
  */
 public class itf_NhanVien extends javax.swing.JInternalFrame {
 
+    NguoiDungServices ndsv = new NguoiDungServices();
     private DefaultTableModel tblModel = new DefaultTableModel();
-    
+
     public itf_NhanVien() {
         initComponents();
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
@@ -23,7 +24,7 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
         this.setSize(1300, 755);
         NguoiDungServices ndsv = new NguoiDungServices();
         loadTableNv1(ndsv.getListnv());
-
+        loadTableNv2(this.ndsv.getListnv0());
     }
 
     public void loadTableNv1(List<NguoiDung> list) {
@@ -43,8 +44,21 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
         }
     }
 
-    public void loadTableNv2() {
-
+     public void loadTableNv2(List<NguoiDung> list) {
+        tblModel = (DefaultTableModel) tblNV1.getModel();
+        tblModel.setRowCount(0);
+        for (NguoiDung nguoiDung : list) {
+            tblModel.addRow(new Object[]{
+                nguoiDung.getMaNV(),
+                nguoiDung.getTenDN(),
+                nguoiDung.getMatKhau(),
+                nguoiDung.getTen(),
+                nguoiDung.getChucVu(),
+                nguoiDung.trangThai(),
+                nguoiDung.getNgayTao(),
+                nguoiDung.getNgaySua()
+            });
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -438,7 +452,7 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnSuaNVActionPerformed
 
     private void btnThemNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemNVActionPerformed
-
+        this.ndsv.insertNhanVien(nguoiDung);
     }//GEN-LAST:event_btnThemNVActionPerformed
 
     private void txtHoTenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtHoTenActionPerformed
