@@ -188,17 +188,20 @@ public class itf_SanPham extends javax.swing.JInternalFrame {
         return new SanPham(txtMaSanPham.getText(), txtTenSanPham.getText(), trangThai);
     }
 
-    public int loadFormSanPham(int index) {
-        txtMaSanPham.setText(this.spsv.getListSP().get(index).getMaSP());
-        txtTenSanPham.setText(this.spsv.getListSP().get(index).getTenSp());
-        int trangThai = this.spsv.getListSP().get(index).getTrangThai();
-        if (trangThai == 1) {
+    public void loadFormSanPham(int index) {
+        String maSP = tblSanPham.getValueAt(index, 1).toString();
+        String tenSP = tblSanPham.getValueAt(index, 2).toString();
+        String trangThai = tblSanPham.getValueAt(index, 3).toString();
+        if (trangThai.equalsIgnoreCase("Hoạt động")) {
             rdConHang.setSelected(true);
         } else {
             rdHetHang.setSelected(true);
 
         }
-        return this.spsv.getListSP().get(index).getIdSP();
+        txtMaSanPham.setText(maSP);
+        txtTenSanPham.setText(tenSP);
+        
+
     }
 
     private void loadTableCTSP(List<ChiTietSanPham> listctsp) {
@@ -1509,7 +1512,17 @@ public class itf_SanPham extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_cbo1MouseClicked
 
     private void cbo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbo1ActionPerformed
-        // TODO add your handling code here:
+        String trangThai = (String) cbo1.getSelectedItem();
+        if (trangThai.equals("Tất cả")) {
+            loadTableSp(this.spsv.getListSP());
+        } else if (trangThai.equals("Hoạt động")) {
+            loadTableSp(this.spsv.getListSP1());
+
+        } else {
+            loadTableSp(this.spsv.getListSP2());
+
+        }
+
 
     }//GEN-LAST:event_cbo1ActionPerformed
 
@@ -1690,6 +1703,23 @@ public class itf_SanPham extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_rdConHangActionPerformed
 
+    private void txtTimKiemCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtTimKiemCaretUpdate
+
+        String getvaluesCbo = cbo1.getSelectedItem().toString();
+        if (getvaluesCbo.equalsIgnoreCase("Tất cả")) {
+            loadTableSp(this.spsv.findAllSanPham(txtTimKiem.getText()));
+        } else if (getvaluesCbo.equalsIgnoreCase("Hoạt động")) {
+            loadTableSp(this.spsv.findSanPham(1, txtTimKiem.getText()));
+        } else {
+            loadTableSp(this.spsv.findSanPham(0, txtTimKiem.getText()));
+
+        }
+
+    }//GEN-LAST:event_txtTimKiemCaretUpdate
+
+    private void txtTienMinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTienMinActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTienMinActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
