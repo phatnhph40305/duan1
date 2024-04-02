@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import model.DangNhap;
 
-
 public class DangNhapServices {
 
     private List<DangNhap> listDangNhap;
@@ -21,13 +20,13 @@ public class DangNhapServices {
 
     public List<DangNhap> getListSP() {
         listDangNhap = new ArrayList<>();
-        sql = "select TenDangNhap,MatKhau,ChucVu,Ten from NguoiDung;";
+        sql = "select TenDangNhap,MatKhau,ChucVu,Ten,trangThai from NguoiDung;";
         try {
             con = DBConnect.getConnection();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-                DangNhap dangNhap = new DangNhap(rs.getString(1), rs.getString(2), rs.getString(3),rs.getString(4));
+                DangNhap dangNhap = new DangNhap(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),rs.getInt(5));
                 listDangNhap.add(dangNhap);
             }
         } catch (Exception e) {
@@ -36,39 +35,46 @@ public class DangNhapServices {
         return listDangNhap;
     }
 
-    
-    public int login_successful(String tenDn, String passW, List<DangNhap> list){
+    public int login_successful(String tenDn, String passW, List<DangNhap> list) {
         boolean checkUserName = false;
-        boolean checkPas=false;
-        
-      // check userName  
+        boolean checkPas = false;
+
+        // check userName  
         for (DangNhap dangNhap : list) {
-            if(dangNhap.getTenDN().equals(tenDn)){
+            if (dangNhap.getTenDN().equals(tenDn)) {
                 checkUserName = true;
                 break;
             }
         }
         // kierm tra mat khau
-        if(checkUserName){
+        if (checkUserName) {
             for (DangNhap dangNhap : list) {
-                if(dangNhap.getTenDN().equals(tenDn)){
+                if (dangNhap.getTenDN().equals(tenDn)) {
                     checkPas = dangNhap.getMatKhau().equals(passW);
                     break;
                 }
             }
         }
-        if(!checkUserName){
+        if (!checkUserName) {
             return 0; // Tên đang nhập sai.
-        }else if(!checkPas){
+        } else if (!checkPas) {
             return 1; // mật khẩu sai
-        }else{
+        } else {
             return 2; // mật khẩu đúng.  
         }
-        
-        
-        
-        
-       
+
     }
-   
+
+  public boolean checkTrangThai(List<DangNhap> list, String tenDN) {
+    for (DangNhap dangNhap : list) {
+        if (dangNhap.getTenDN().equals(tenDN)) {
+            return dangNhap.getTrangThaiNGuoiDung()==1 ;
+            
+        }
+         
+    }
+    return false;
+}
+
+    
 }

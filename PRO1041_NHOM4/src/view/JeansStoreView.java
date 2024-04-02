@@ -1,4 +1,3 @@
-
 package view;
 
 import java.awt.Color;
@@ -17,7 +16,7 @@ public class JeansStoreView extends javax.swing.JFrame {
     public JeansStoreView() {
         initComponents();
         this.dispose();
-        
+
         setSize(1400, 800);
         this.setLocationRelativeTo(null);
         chucVu = DangNhapView.chucVu;
@@ -519,10 +518,15 @@ public class JeansStoreView extends javax.swing.JFrame {
 
     private void pnlDoiMatKhauMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlDoiMatKhauMouseClicked
         // TODO add your handling code here:
-        onClickMenu(pnlDoiMatKhau);
-        itf_DoiMatKhau doiMatKhau = new itf_DoiMatKhau();
-        jdpMain.removeAll();
-        jdpMain.add(doiMatKhau).setVisible(true);
+        if (check) {
+            onClickMenu(pnlDoiMatKhau);
+            itf_DoiMatKhau doiMatKhau = new itf_DoiMatKhau();
+            jdpMain.removeAll();
+            jdpMain.add(doiMatKhau).setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "bạn không đủ quyền");
+
+        }
     }//GEN-LAST:event_pnlDoiMatKhauMouseClicked
 
     private void pnlKhachHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlKhachHangMouseClicked
@@ -535,10 +539,15 @@ public class JeansStoreView extends javax.swing.JFrame {
 
     private void pnlKhuyenMaiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlKhuyenMaiMouseClicked
         // TODO add your handling code here:
-        onClickMenu(pnlKhuyenMai);
-        itf_KhuyenMai khuyenMai = new itf_KhuyenMai();
-        jdpMain.removeAll();
-        jdpMain.add(khuyenMai).setVisible(true);
+        if (check) {
+            onClickMenu(pnlKhuyenMai);
+            itf_KhuyenMai khuyenMai = new itf_KhuyenMai();
+            jdpMain.removeAll();
+            jdpMain.add(khuyenMai).setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "bạn không đủ quyền");
+
+        }
     }//GEN-LAST:event_pnlKhuyenMaiMouseClicked
 
     private void pnlHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlHoaDonMouseClicked
@@ -556,23 +565,28 @@ public class JeansStoreView extends javax.swing.JFrame {
 
     private void pnlThongKeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlThongKeMouseClicked
         // TODO add your handling code here:
-        if(check){
+        if (check) {
             onClickMenu(pnlThongKe);
-        itf_ThongKe thongKe = new itf_ThongKe();
-        jdpMain.removeAll();
-        jdpMain.add(thongKe).setVisible(true);
-        }else{
+            itf_ThongKe thongKe = new itf_ThongKe();
+            jdpMain.removeAll();
+            jdpMain.add(thongKe).setVisible(true);
+        } else {
             JOptionPane.showMessageDialog(this, "bạn không đủ quyền");
         }
-                
+
     }//GEN-LAST:event_pnlThongKeMouseClicked
 
     private void pnlNhanVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlNhanVienMouseClicked
         // TODO add your handling code here:
-        onClickMenu(pnlNhanVien);
-        itf_NhanVien nhanVien = new itf_NhanVien();
-        jdpMain.removeAll();
-        jdpMain.add(nhanVien).setVisible(true);
+        if (check) {
+            onClickMenu(pnlNhanVien);
+            itf_NhanVien nhanVien = new itf_NhanVien();
+            jdpMain.removeAll();
+            jdpMain.add(nhanVien).setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "bạn không đủ quyền");
+
+        }
     }//GEN-LAST:event_pnlNhanVienMouseClicked
 
     private void pnlSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlSanPhamMouseClicked

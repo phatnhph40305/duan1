@@ -1,4 +1,3 @@
-
 package view;
 
 import javax.swing.JOptionPane;
@@ -15,8 +14,6 @@ public class DangNhapView extends javax.swing.JFrame {
     public static String chucVu;
     public static String tenNd;
 
-    
-    
     public DangNhapView() {
         initComponents();
         this.dispose();
@@ -35,6 +32,7 @@ public class DangNhapView extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "không được để trống.");
             return false;
         }
+
         int check = dnsv.login_successful(txtTaiKhoan.getText(), txtMatKhau.getText(), this.dnsv.getListSP());
         if (check == 0) {
             JOptionPane.showMessageDialog(this, "Tên đăng nhập sai.");
@@ -42,11 +40,12 @@ public class DangNhapView extends javax.swing.JFrame {
         } else if (check == 1) {
             JOptionPane.showMessageDialog(this, "Mật khẩu sai");
             return false;
-        } else {
-            JOptionPane.showMessageDialog(this, "Đăng nhập thành công.");
-            return true;
-
         }
+           if (!dnsv.checkTrangThai(this.dnsv.getListSP(), txtTaiKhoan.getText())) {
+            JOptionPane.showMessageDialog(this, "nhân viên đã nghỉ làm");
+            return false;
+        }
+        return true;
     }
 
     @SuppressWarnings("unchecked")
@@ -217,6 +216,7 @@ public class DangNhapView extends javax.swing.JFrame {
                     chucVu = dangNhap.getChucVu();
                 }
             }
+            JOptionPane.showMessageDialog(this,"Đăng nhập thành công");
             JeansStoreView jsv = new JeansStoreView();
             jsv.setVisible(true);
         }

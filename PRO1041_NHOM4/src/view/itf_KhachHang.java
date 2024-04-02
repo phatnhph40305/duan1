@@ -79,7 +79,7 @@ public class itf_KhachHang extends javax.swing.JInternalFrame {
 
     private void updateKhachHang() {
         int index = tblKhachHang.getSelectedRow();
-        int idKhachHang = this.qlkh.getListKhachHang().get(index).getIdKhachHang();
+        int idKhachHang = (int) tblKhachHang.getValueAt(index, 0);
 //        JOptionPane.showMessageDialog(this,idKhachHang);
         this.qlkh.updateKH(readForm(), idKhachHang);
         loadFormKhachHang(this.qlkh.getListKhachHang());

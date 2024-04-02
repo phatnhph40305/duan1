@@ -20,6 +20,15 @@ public class NguoiDung {
     public NguoiDung() {
     }
 
+    public NguoiDung(String ten, String maNV, String tenDN, String matKhau, String chucVu, int trangThai) {
+        this.ten = ten;
+        this.maNV = maNV;
+        this.tenDN = tenDN;
+        this.matKhau = matKhau;
+        this.chucVu = chucVu;
+        this.trangThai = trangThai;
+    }
+
     public NguoiDung(int idNguoiDung, String ten, String maNV, String tenDN, String matKhau, String chucVu, int trangThai, Date ngayTao, Date ngaySua) {
         this.idNguoiDung = idNguoiDung;
         this.ten = ten;

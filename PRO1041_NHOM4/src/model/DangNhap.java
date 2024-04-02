@@ -3,7 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package model;
+
 import java.util.Date;
+
 /**
  *
  * @author Acer
@@ -11,23 +13,24 @@ import java.util.Date;
 public class DangNhap {
 
     private int idNguoiDung;
-    private  String tenNguoiDung;
+    private String tenNguoiDung;
     private String maNV;
-    private  String tenDN;
+    private String tenDN;
     private String matKhau;
-    private   String chucVu;
+    private String chucVu;
     private int trangThaiNGuoiDung;
     private Date ngayTao;
     private Date ngaySua;
 
     public DangNhap() {
     }
-    
-    public DangNhap(String tenDN, String matKhau, String chucVu,String tenNguoiDung) {
+
+    public DangNhap(String tenDN, String matKhau, String chucVu, String tenNguoiDung, int trangThai) {
         this.tenDN = tenDN;
         this.matKhau = matKhau;
         this.chucVu = chucVu;
         this.tenNguoiDung = tenNguoiDung;
+        this.trangThaiNGuoiDung = trangThai;
     }
 
     public DangNhap(int idNguoiDung, String tenNguoiDung, String maNV, String tenDN, String matKhau, String chucVu, int trangThaiNGuoiDung, Date ngayTao, Date ngaySua) {
@@ -82,7 +85,7 @@ public class DangNhap {
         this.matKhau = matKhau;
     }
 
-    public  String getChucVu() {
+    public String getChucVu() {
         return chucVu;
     }
 

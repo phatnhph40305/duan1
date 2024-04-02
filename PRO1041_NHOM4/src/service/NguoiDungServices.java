@@ -23,7 +23,7 @@ public class NguoiDungServices {
 
     public List<NguoiDung> getListnv() {
         listNguoiDung = new ArrayList<>();
-        sql = " select IdNguoiDung,ten,MaNV,TenDangNhap,MatKhau,ChucVu,TrangThai,Ngaytao,NgaySua from NguoiDung where TrangThai =1;";
+        sql = " select IdNguoiDung,ten,MaNV,TenDangNhap,MatKhau,ChucVu,TrangThai,Ngaytao,NgaySua from NguoiDung ;";
         try {
             con = DBConnect.getConnection();
             ps = con.prepareStatement(sql);
@@ -39,12 +39,13 @@ public class NguoiDungServices {
         return listNguoiDung;
     }
 
-    public List<NguoiDung> getListnv0() {
+    public List<NguoiDung> getListnvByTrangThai(int trangThai) {
         listNguoiDung = new ArrayList<>();
-        sql = " select IdNguoiDung,ten,MaNV,TenDangNhap,MatKhau,ChucVu,TrangThai,Ngaytao,NgaySua from NguoiDung where TrangThai =0;";
+        sql = " select IdNguoiDung,ten,MaNV,TenDangNhap,MatKhau,ChucVu,TrangThai,Ngaytao,NgaySua from NguoiDung where trangThai =?;";
         try {
             con = DBConnect.getConnection();
             ps = con.prepareStatement(sql);
+            ps.setInt(1, trangThai);
             rs = ps.executeQuery();
             while (rs.next()) {
                 NguoiDung nguoiDuong = new NguoiDung(rs.getInt(1), rs.getString(2), rs.getString(3),
@@ -91,9 +92,8 @@ public class NguoiDungServices {
             ps.executeUpdate();
 
         } catch (Exception e) {
-            e.printStackTrace( );
+            e.printStackTrace();
         }
     }
-    
 
 }
