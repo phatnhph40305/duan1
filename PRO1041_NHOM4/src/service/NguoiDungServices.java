@@ -4,10 +4,13 @@
  */
 package service;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.util.List;
 import model.NguoiDung;
 import java.sql.*;
 import java.util.ArrayList;
+import org.apache.poi.xssf.usermodel.*;
 
 /**
  *
@@ -96,4 +99,46 @@ public class NguoiDungServices {
         }
     }
 
+    public void exportExcelKhachHang(List<NguoiDung> list) {
+        // tạo workBook
+        try {
+            FileInputStream fis = new FileInputStream("dataJeanStore.xlsx");
+            XSSFWorkbook workBook = new XSSFWorkbook(fis);
+            XSSFSheet sheet = workBook.getSheetAt(2);
+
+            // tạo headRow 
+            XSSFRow headRow = sheet.createRow(0);
+            headRow.createCell(0).setCellValue("Id nhân viên");
+            headRow.createCell(1).setCellValue("Mã nhân viên");
+            headRow.createCell(2).setCellValue("Tên nhân viên");
+            headRow.createCell(3).setCellValue("Tên đăng nhập");
+            headRow.createCell(4).setCellValue("Mật khẩu");
+            headRow.createCell(5).setCellValue("Chức vụ");
+            headRow.createCell(6).setCellValue("Trạng thái");
+            headRow.createCell(7).setCellValue("Ngày tạo");
+            headRow.createCell(8).setCellValue("Ngày sửa");
+
+            // tạo data row
+            int index = 1;
+            for (NguoiDung nguoiDung : list) {
+                XSSFRow row = sheet.createRow(index++);
+                row.createCell(0).setCellValue(nguoiDung.getIdNguoiDung());
+                row.createCell(1).setCellValue(nguoiDung.getMaNV());
+                row.createCell(2).setCellValue(nguoiDung.getTen());
+                row.createCell(3).setCellValue(nguoiDung.getTenDN());
+                row.createCell(4).setCellValue(nguoiDung.getMatKhau());
+                row.createCell(5).setCellValue(nguoiDung.getChucVu());
+                row.createCell(6).setCellValue(nguoiDung.getTrangThai());
+                row.createCell(7).setCellValue(nguoiDung.getNgayTao());
+                row.createCell(8).setCellValue(nguoiDung.getNgaySua());
+
+            }
+            // ghi file excel
+            try (FileOutputStream fos = new FileOutputStream("dataJeanStore.xlsx");) {
+                workBook.write(fos);
+            }
+        } catch (Exception e) {
+        }
+
+    }
 }

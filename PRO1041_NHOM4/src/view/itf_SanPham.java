@@ -687,6 +687,11 @@ public class itf_SanPham extends javax.swing.JInternalFrame {
         });
 
         jButton5.setText("Xuất file");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jButton6.setText("Nhập file");
 
@@ -1024,6 +1029,11 @@ public class itf_SanPham extends javax.swing.JInternalFrame {
         });
 
         jButton4.setText("Xuất file");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         btnDau2.setText("<<");
         btnDau2.addActionListener(new java.awt.event.ActionListener() {
@@ -1417,6 +1427,11 @@ public class itf_SanPham extends javax.swing.JInternalFrame {
         });
 
         jButton1.setText("Xuất file");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         btnDau3.setText("<<");
         btnDau3.addActionListener(new java.awt.event.ActionListener() {
@@ -1549,7 +1564,7 @@ public class itf_SanPham extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1099, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1099, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -1784,6 +1799,19 @@ public class itf_SanPham extends javax.swing.JInternalFrame {
     private void txtTienMinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTienMinActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTienMinActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        this.spsv.exportSanPham(this.spsv.getListSP());
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+ctsps.exportSanPhamChiTiet(this.ctsps.loadDataTableCTSP());
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        tts.exportSanPham(this.tts.loadDataKichThuoc());
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

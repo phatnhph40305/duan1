@@ -226,6 +226,11 @@ public class itf_KhachHang extends javax.swing.JInternalFrame {
         btnThemTuExcel.setText("Thêm từ Excel");
 
         tbnXuatFile.setText("Xuất file");
+        tbnXuatFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tbnXuatFileActionPerformed(evt);
+            }
+        });
 
         buttonGroup1.add(rdHoatDong);
         rdHoatDong.setText("Hoạt động");
@@ -526,8 +531,15 @@ public class itf_KhachHang extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtSoDienThoaiActionPerformed
 
     private void txtTimKiemCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtTimKiemCaretUpdate
+        if (txtTimKiem.equals("")) {
+            return;
+        }
         loadFormKhachHang(this.qlkh.searchByName(txtTimKiem.getText()));
     }//GEN-LAST:event_txtTimKiemCaretUpdate
+
+    private void tbnXuatFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbnXuatFileActionPerformed
+        qlkh.exportExcelKhachHang(this.qlkh.getListKhachHang());
+    }//GEN-LAST:event_tbnXuatFileActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

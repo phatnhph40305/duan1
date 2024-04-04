@@ -4,10 +4,13 @@
  */
 package service;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.util.List;
 import model.KhachHang;
 import java.sql.*;
 import java.util.ArrayList;
+import org.apache.poi.xssf.usermodel.*;
 
 /**
  *
@@ -60,7 +63,7 @@ public class QuanLyKhachHang {
         try {
             con = DBConnect.getConnection();
             ps = con.prepareStatement(sql);
-            ps.setString(1,"%" + name + "%"  );
+            ps.setString(1, "%" + name + "%");
             rs = ps.executeQuery();
             while (rs.next()) {
                 KhachHang khachHang = new KhachHang(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getDate(6), rs.getDate(7));
@@ -89,4 +92,43 @@ public class QuanLyKhachHang {
             e.printStackTrace();
         }
     }
+
+    public void exportExcelKhachHang(List<KhachHang> list) {
+        // tạo workBook
+        try {
+            FileInputStream fis = new FileInputStream("dataJeanStore.xlsx");
+            XSSFWorkbook workBook = new XSSFWorkbook(fis);
+            XSSFSheet sheet = workBook.getSheetAt(0);
+
+            // tạo headRow 
+            XSSFRow headRow = sheet.createRow(0);
+            headRow.createCell(0).setCellValue("Id khách hàng");
+            headRow.createCell(1).setCellValue("Mã khách hàng");
+            headRow.createCell(2).setCellValue("Tên khách hàng");
+            headRow.createCell(3).setCellValue("SDT khách hàng");
+            headRow.createCell(4).setCellValue("Trạng thái khách hàng");
+            headRow.createCell(5).setCellValue("Ngày tạo khách hàng");
+            headRow.createCell(6).setCellValue("Ngày sửa khách hàng");
+            // tạo data row
+            int index = 1;
+            for (KhachHang khachHang : list) {
+                XSSFRow row = sheet.createRow(index++);
+                row.createCell(0).setCellValue(khachHang.getIdKhachHang());
+                row.createCell(1).setCellValue(khachHang.getMaKh());
+                row.createCell(2).setCellValue(khachHang.getTenKhachHang());
+                row.createCell(3).setCellValue(khachHang.getSdtKhachHang());
+                row.createCell(4).setCellValue(khachHang.getTrangthai());
+                row.createCell(5).setCellValue(khachHang.getNgayTao());
+                row.createCell(6).setCellValue(khachHang.getNgaySua());
+
+            }
+            // ghi file excel
+            try (FileOutputStream fos = new FileOutputStream("dataJeanStore.xlsx");) {
+                workBook.write(fos);
+            }
+        } catch (Exception e) {
+        }
+
+    }
+
 }

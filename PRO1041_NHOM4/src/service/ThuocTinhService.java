@@ -1,12 +1,18 @@
 package service;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import model.SanPham;
 import model.ThuocTinh;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class ThuocTinhService {
 
@@ -205,7 +211,7 @@ public class ThuocTinhService {
         }
     }
 
-    public void updateXuatXu(String ten,int id, int trangthai) {
+    public void updateXuatXu(String ten, int id, int trangthai) {
         try {
             String sql = "update XuatXu set Ten =?, TrangThai = ?,NgaySua= getdate()\n"
                     + "where IdXuatXu = ?";
@@ -222,13 +228,13 @@ public class ThuocTinhService {
         }
     }
 
-    public void updateMauSac(String ten,int id, int trangthai) {
+    public void updateMauSac(String ten, int id, int trangthai) {
         try {
             String sql = "update MauSac set Ten =?, TrangThai = ?,NgaySua= getdate()\n"
                     + "where IdMauSac = ?";
             Connection con = DBConnect.getConnection();
             PreparedStatement ps = con.prepareStatement(sql);
-           ps.setString(1, ten);
+            ps.setString(1, ten);
             ps.setInt(2, trangthai);
             ps.setInt(3, id);
             ps.executeUpdate();
@@ -239,7 +245,7 @@ public class ThuocTinhService {
         }
     }
 
-    public void updateThuongHieu(String ten,int id, int trangthai) {
+    public void updateThuongHieu(String ten, int id, int trangthai) {
         try {
             String sql = "update ThuongHieu set TenThuongHieu=?,TrangThai = ?,NgaySua= getdate()\n"
                     + "where IdThuongHieu = ?";
@@ -256,7 +262,7 @@ public class ThuocTinhService {
         }
     }
 
-    public void updateKichThuoc(String ten,int id, int trangthai) {
+    public void updateKichThuoc(String ten, int id, int trangthai) {
         try {
             String sql = "update KichThuoc set Ten =?, TrangThai = ?,NgaySua= getdate()\n"
                     + "where IdKichThuoc = ?";
@@ -271,5 +277,36 @@ public class ThuocTinhService {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, "sửa thất bại");
         }
+    }
+
+    public void exportSanPham(List<ThuocTinh> list) {
+        try {
+            FileInputStream fis = new FileInputStream("dataJeanStore.xlsx");
+            XSSFWorkbook workBook = new XSSFWorkbook(fis);
+            XSSFSheet sheet = workBook.getSheetAt(4);
+
+            XSSFRow headRow = sheet.createRow(0);
+            headRow.createCell(0).setCellValue("ID thuộc tính");
+            headRow.createCell(1).setCellValue("tên");
+            headRow.createCell(2).setCellValue("Trạng thái");
+           
+
+            int index = 1;
+            for (ThuocTinh thuocTinh : list) {
+                XSSFRow row = sheet.createRow(index++);
+                row.createCell(0).setCellValue(thuocTinh.getId());
+                row.createCell(1).setCellValue(thuocTinh.getTen());
+                row.createCell(2).setCellValue(thuocTinh.getTrangThai());
+               
+
+                try (FileOutputStream outputStream = new FileOutputStream("dataJeanStore.xlsx")) {
+                    workBook.write(outputStream);
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 }

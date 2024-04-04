@@ -1,10 +1,15 @@
 package service;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.util.List;
 import java.sql.*;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import model.ChiTietSanPham;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class ChiTietSanPhamService {
 
@@ -187,5 +192,45 @@ public class ChiTietSanPhamService {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, "sửa thất bại");
         }
+    }
+    public void exportSanPhamChiTiet(List<ChiTietSanPham> list) {
+        try {
+            FileInputStream fis = new FileInputStream("dataJeanStore.xlsx");
+            XSSFWorkbook workBook = new XSSFWorkbook(fis);
+            XSSFSheet sheet = workBook.getSheetAt(3);
+
+            XSSFRow headRow = sheet.createRow(0);
+            headRow.createCell(0).setCellValue("ID ctsp");
+            headRow.createCell(1).setCellValue("Mã ctsp");
+            headRow.createCell(2).setCellValue("Số lượng");
+            headRow.createCell(3).setCellValue("Đơn giá");
+            headRow.createCell(4).setCellValue("Màu sắc");
+            headRow.createCell(5).setCellValue("kích thước");
+            headRow.createCell(6).setCellValue("Thương hiệu");
+            headRow.createCell(7).setCellValue("Xuất xứ");
+            headRow.createCell(8).setCellValue("trạng thái");
+
+            int index = 1;
+            for (ChiTietSanPham ctsp : list) {
+                XSSFRow row = sheet.createRow(index++);
+                row.createCell(0).setCellValue(ctsp.getId());
+                row.createCell(1).setCellValue(ctsp.getMaSP());
+                row.createCell(02).setCellValue(ctsp.getSoluong());
+                row.createCell(3).setCellValue(ctsp.getDongia());
+                row.createCell(4).setCellValue(ctsp.getMauSac());
+                row.createCell(5).setCellValue(ctsp.getKichThuoc());
+                row.createCell(6).setCellValue(ctsp.getThuongHieu());
+                row.createCell(7).setCellValue(ctsp.getXuatXu());
+                row.createCell(8).setCellValue(ctsp.getTrangThai());
+
+                try (FileOutputStream outputStream = new FileOutputStream("dataJeanStore.xlsx")) {
+                    workBook.write(outputStream);
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 }

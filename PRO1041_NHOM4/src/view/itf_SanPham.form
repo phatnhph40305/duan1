@@ -488,6 +488,9 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Xu&#x1ea5;t file"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton5ActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="jButton6">
                   <Properties>
@@ -1203,6 +1206,9 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Xu&#x1ea5;t file"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton4ActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="btnDau2">
                   <Properties>
@@ -1637,6 +1643,9 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Xu&#x1ea5;t file"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="btnDau3">
                   <Properties>

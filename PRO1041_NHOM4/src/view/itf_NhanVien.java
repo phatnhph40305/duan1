@@ -14,13 +14,13 @@ import service.NguoiDungServices;
  * @author Admin
  */
 public class itf_NhanVien extends javax.swing.JInternalFrame {
-
+    
     int id = -1;
     private DefaultTableModel tblModel = new DefaultTableModel();
     private DefaultTableModel tblModel1 = new DefaultTableModel();
-
+    
     private NguoiDungServices ndsv = new NguoiDungServices();
-
+    
     public itf_NhanVien() {
         initComponents();
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
@@ -32,9 +32,9 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
         loadTableNv2(ndsv.getListnvByTrangThai(1));
         loadTableNv3(ndsv.getListnvByTrangThai(0));
         clearForm();
-
+        
     }
-
+    
     public void loadTableNv(List<NguoiDung> list) {
         tblModel = (DefaultTableModel) tblNV1.getModel();
         tblModel.setRowCount(0);
@@ -51,7 +51,7 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
             });
         }
     }
-
+    
     public void loadTableNv2(List<NguoiDung> list) {
         tblModel1 = (DefaultTableModel) tblNV4.getModel();
         tblModel1.setRowCount(0);
@@ -68,7 +68,7 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
             });
         }
     }
-
+    
     public void loadTableNv3(List<NguoiDung> list) {
         tblModel1 = (DefaultTableModel) tblNV3.getModel();
         tblModel1.setRowCount(0);
@@ -85,7 +85,7 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
             });
         }
     }
-
+    
     public void detaiTable(int index, List<NguoiDung> list) {
         NguoiDung nd = list.get(index);
         txtMaNV.setText(nd.getMaNV());
@@ -103,7 +103,7 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
             rdQuanLy.setSelected(true);
         }
     }
-
+    
     private NguoiDung readForm() {
         String chucVu = "";
         if (rdNhanVien.isSelected()) {
@@ -114,13 +114,13 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
         int trangThai = 0;
         if (rdoDangLamViec.isSelected()) {
             trangThai = 1;
-
+            
         } else {
             trangThai = 0;
         }
         return new NguoiDung(txtHoTen.getText(), txtMaNV.getText(), txttenDn.getText(), txtMatKhau.getText(), chucVu, trangThai);
     }
-
+    
     private void clearForm() {
         txtMaNV.setText("");
         txtHoTen.setText("");
@@ -132,9 +132,9 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
         loadTableNv(this.ndsv.getListnv());
         loadTableNv2(this.ndsv.getListnvByTrangThai(1));
         loadTableNv3(this.ndsv.getListnvByTrangThai(0));
-
+        
     }
-
+    
     private boolean validateAddNV() {
         if (txtMaNV.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "Không được để trống mã nhân viên");
@@ -171,16 +171,16 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
         if (rdNhanVien.isSelected() == false && rdQuanLy.isSelected() == false) {
             JOptionPane.showMessageDialog(this, "Vui lòng chọn chức vụ");
             return false;
-
+            
         }
         if (rdoDangLamViec.isSelected() == false && rdoNghiViec.isSelected() == false) {
             JOptionPane.showMessageDialog(this, "Vui lòng chọn trạng thái");
             return false;
-
+            
         }
         return true;
     }
-
+    
     private boolean validateUpdateNV() {
         if (txtMaNV.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "Không được để trống mã nhân viên");
@@ -190,7 +190,7 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Mã nhân viên phải bắt đầu bằng: 'NV ' ");
             return false;
         }
-
+        
         if (txttenDn.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "Không được để trống tên đăng nhập");
             return false;
@@ -212,16 +212,16 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
         if (rdNhanVien.isSelected() == false && rdQuanLy.isSelected() == false) {
             JOptionPane.showMessageDialog(this, "Vui lòng chọn chức vụ");
             return false;
-
+            
         }
         if (rdoDangLamViec.isSelected() == false && rdoNghiViec.isSelected() == false) {
             JOptionPane.showMessageDialog(this, "Vui lòng chọn trạng thái");
             return false;
-
+            
         }
         return true;
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -601,7 +601,12 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton1.setText("Nhập từ excel");
+        jButton1.setText("Xuất file excel");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel30.setText("Mật khẩu");
 
@@ -794,6 +799,10 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
         btnSuaNV.setEnabled(true);
 
     }//GEN-LAST:event_tblNV4MouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        ndsv.exportExcelKhachHang(ndsv.getListnv());
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
