@@ -20,7 +20,6 @@ public class JeansStoreView extends javax.swing.JFrame {
         setSize(1400, 800);
         this.setLocationRelativeTo(null);
         chucVu = DangNhapView.chucVu;
-        chucVu = "quản lý";
         check = chucVu.equalsIgnoreCase("quản lý");
         if (check) {
             itf_ThongKe thongKe = new itf_ThongKe();
@@ -63,6 +62,8 @@ public class JeansStoreView extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         pnlDangXuat = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
+        pnlHoaDon1 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
         jdpMain = new javax.swing.JDesktopPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -228,14 +229,14 @@ public class JeansStoreView extends javax.swing.JFrame {
         jLabel4.setBackground(new java.awt.Color(51, 204, 255));
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/sticky-notes.png"))); // NOI18N
-        jLabel4.setText("Hóa đơn");
+        jLabel4.setText("Bán hàng");
 
         javax.swing.GroupLayout pnlHoaDonLayout = new javax.swing.GroupLayout(pnlHoaDon);
         pnlHoaDon.setLayout(pnlHoaDonLayout);
         pnlHoaDonLayout.setHorizontalGroup(
             pnlHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlHoaDonLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(51, Short.MAX_VALUE)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -243,7 +244,7 @@ public class JeansStoreView extends javax.swing.JFrame {
             pnlHoaDonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlHoaDonLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
+                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -398,6 +399,37 @@ public class JeansStoreView extends javax.swing.JFrame {
                     .addContainerGap()))
         );
 
+        pnlHoaDon1.setBackground(new java.awt.Color(102, 255, 51));
+        pnlHoaDon1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pnlHoaDon1MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                pnlHoaDon1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                pnlHoaDon1MouseExited(evt);
+            }
+        });
+
+        jLabel5.setBackground(new java.awt.Color(51, 204, 255));
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/sticky-notes.png"))); // NOI18N
+        jLabel5.setText("Hóa đơn");
+
+        javax.swing.GroupLayout pnlHoaDon1Layout = new javax.swing.GroupLayout(pnlHoaDon1);
+        pnlHoaDon1.setLayout(pnlHoaDon1Layout);
+        pnlHoaDon1Layout.setHorizontalGroup(
+            pnlHoaDon1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlHoaDon1Layout.createSequentialGroup()
+                .addGap(0, 45, Short.MAX_VALUE)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        pnlHoaDon1Layout.setVerticalGroup(
+            pnlHoaDon1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout pnlMenuLayout = new javax.swing.GroupLayout(pnlMenu);
         pnlMenu.setLayout(pnlMenuLayout);
         pnlMenuLayout.setHorizontalGroup(
@@ -409,11 +441,11 @@ public class JeansStoreView extends javax.swing.JFrame {
             .addComponent(pnlKhachHang, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(pnlMenuLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnlMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pnlKhuyenMai, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnlDoiMatKhau, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnlDangXuat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(pnlHoaDon1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
+            .addComponent(pnlDangXuat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnlDoiMatKhau, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnlKhuyenMai, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         pnlMenuLayout.setVerticalGroup(
             pnlMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -427,13 +459,15 @@ public class JeansStoreView extends javax.swing.JFrame {
                 .addComponent(pnlHoaDon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlKhachHang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(pnlHoaDon1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlKhuyenMai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(pnlDoiMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(pnlDangXuat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(271, Short.MAX_VALUE))
+                .addContainerGap(227, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jdpMainLayout = new javax.swing.GroupLayout(jdpMain);
@@ -483,7 +517,7 @@ public class JeansStoreView extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(pnlTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 792, Short.MAX_VALUE))
+                .addGap(0, 818, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addGap(54, 54, 54)
@@ -543,7 +577,7 @@ public class JeansStoreView extends javax.swing.JFrame {
     private void pnlHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlHoaDonMouseClicked
         // TODO add your handling code here:
         onClickMenu(pnlHoaDon);
-        itf_HoaDon hoaDon = new itf_HoaDon();
+        itf_BanHang hoaDon = new itf_BanHang();
         jdpMain.removeAll();
         jdpMain.add(hoaDon).setVisible(true);
     }//GEN-LAST:event_pnlHoaDonMouseClicked
@@ -662,9 +696,22 @@ public class JeansStoreView extends javax.swing.JFrame {
         exitMenu(pnlDangXuat);
     }//GEN-LAST:event_pnlDangXuatMouseExited
 
-    /**
-     * @param args the command line arguments
-     */
+    private void pnlHoaDon1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlHoaDon1MouseClicked
+        onClickMenu(pnlHoaDon1);
+        itf_HoaDon hoadon = new itf_HoaDon();
+        jdpMain.removeAll();
+        jdpMain.add(hoadon).setVisible(true);
+    }//GEN-LAST:event_pnlHoaDon1MouseClicked
+
+    private void pnlHoaDon1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlHoaDon1MouseEntered
+        enterMenu(pnlHoaDon1);
+    }//GEN-LAST:event_pnlHoaDon1MouseEntered
+
+    private void pnlHoaDon1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlHoaDon1MouseExited
+        exitMenu(pnlHoaDon1);
+    }//GEN-LAST:event_pnlHoaDon1MouseExited
+
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -709,6 +756,7 @@ public class JeansStoreView extends javax.swing.JFrame {
         pnlDoiMatKhau.setBackground(defaultColor);
         pnlKhuyenMai.setBackground(defaultColor);
         pnlNhanVien.setBackground(defaultColor);
+        pnlHoaDon1.setBackground(defaultColor);
         panel.setBackground(selectedColor);
     }
 
@@ -735,6 +783,7 @@ public class JeansStoreView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -745,6 +794,7 @@ public class JeansStoreView extends javax.swing.JFrame {
     private javax.swing.JPanel pnlDangXuat;
     private javax.swing.JPanel pnlDoiMatKhau;
     private javax.swing.JPanel pnlHoaDon;
+    private javax.swing.JPanel pnlHoaDon1;
     private javax.swing.JPanel pnlKhachHang;
     private javax.swing.JPanel pnlKhuyenMai;
     private javax.swing.JPanel pnlMenu;

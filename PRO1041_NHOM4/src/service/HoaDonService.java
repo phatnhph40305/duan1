@@ -60,7 +60,26 @@ public class HoaDonService {
 
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                HoaDon hd = new HoaDon(rs.getInt(1),"", rs.getString(3),rs.getInt(4),rs.getString(5));
+                HoaDon hd = new HoaDon(rs.getInt(1), "", rs.getString(3), rs.getInt(4), rs.getString(5));
+                litshd.add(hd);
+            }
+            return litshd;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public List loadTableHoaDon3() {
+        List<HoaDon> litshd = new ArrayList<>();
+        try {
+            String sql = "select HoaDon.IdHoaDon,KhachHang.Ten,NguoiDung.Ten,HoaDon.TrangThai,HoaDon.NgayTao from HoaDon left join KhachHang on HoaDon.IdKhachHang = KhachHang.IdKhachHang left join NguoiDung on HoaDon.IdNguoiDung = NguoiDung.IdNguoiDung";
+            Connection con = DBConnect.getConnection();
+            PreparedStatement ps = con.prepareStatement(sql);
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                HoaDon hd = new HoaDon(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5));
                 litshd.add(hd);
             }
             return litshd;
@@ -237,7 +256,7 @@ public class HoaDonService {
         }
     }
 
-    public void thanhtoantHoaDon(int idkh, int idnv, int idhd) {
+    public boolean thanhtoantHoaDon(int idkh, int idnv, int idhd, double tienthua) {
         try {
             String sql = "update HoaDon \n"
                     + "set IdKhachHang = ?,IdNguoiDung = ?,NgayMuaHang = GETDATE(),TrangThai = 1 where IdHoaDon = ?";
@@ -248,13 +267,14 @@ public class HoaDonService {
             ps.setInt(3, idhd);
 
             ps.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Thanh toán thành công. Tiền thừa của khách là :" + tienthua);
+            return true;
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Không có khách hàng này");
-            return;
+            return false;
         }
     }
 
-    public void thanhtoantHoaDon1(int idnv, int idhd) {
+    public void thanhtoantHoaDon1(int idnv, int idhd, double tienthua) {
         try {
             String sql = "update HoaDon \n"
                     + "set IdNguoiDung = ?,NgayMuaHang = GETDATE(),TrangThai = 1 where IdHoaDon = ?";
@@ -265,6 +285,7 @@ public class HoaDonService {
             ps.setInt(2, idhd);
 
             ps.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Thanh toán thành công. Tiền thừa của khách là :" + tienthua);
         } catch (Exception e) {
             e.printStackTrace();
         }
