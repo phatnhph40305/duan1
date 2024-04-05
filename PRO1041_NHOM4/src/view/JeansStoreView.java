@@ -16,7 +16,7 @@ public class JeansStoreView extends javax.swing.JFrame {
     public JeansStoreView() {
         initComponents();
         this.dispose();
-
+ 
         setSize(1400, 800);
         this.setLocationRelativeTo(null);
         chucVu = DangNhapView.chucVu;

@@ -539,6 +539,7 @@ public class itf_KhachHang extends javax.swing.JInternalFrame {
 
     private void tbnXuatFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbnXuatFileActionPerformed
         qlkh.exportExcelKhachHang(this.qlkh.getListKhachHang());
+        JOptionPane.showMessageDialog(this, "xuất file thành công");
     }//GEN-LAST:event_tbnXuatFileActionPerformed
 
 

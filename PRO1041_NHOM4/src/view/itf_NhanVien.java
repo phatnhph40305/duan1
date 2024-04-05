@@ -802,6 +802,7 @@ public class itf_NhanVien extends javax.swing.JInternalFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         ndsv.exportExcelKhachHang(ndsv.getListnv());
+        JOptionPane.showMessageDialog(this,"xuất file thành công");
     }//GEN-LAST:event_jButton1ActionPerformed
 
 

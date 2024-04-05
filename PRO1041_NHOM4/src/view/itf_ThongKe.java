@@ -7,22 +7,27 @@ package view;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
+import service.ThongKeServices;
 
 /**
  *
  * @author Admin
  */
 public class itf_ThongKe extends javax.swing.JInternalFrame {
-
+    ThongKeServices tksv = new ThongKeServices();
     /**
      * Creates new form itf_ThongKe
      */
     public itf_ThongKe() {
         initComponents();
         this.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
-        BasicInternalFrameUI uI = (BasicInternalFrameUI) this.getUI();
-        uI.setNorthPane(null);
+
         this.setSize(1300, 755);
+        tongDonHang();
+    }
+
+    public void tongDonHang() {
+        jlbTongDonHang.setText(String.valueOf(tksv.getTongDonHang()));
     }
 
     /**
@@ -42,8 +47,8 @@ public class itf_ThongKe extends javax.swing.JInternalFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jLabel34 = new javax.swing.JLabel();
-        jLabel35 = new javax.swing.JLabel();
+        jlbThanhCong = new javax.swing.JLabel();
+        jlbDaHuy = new javax.swing.JLabel();
         jlbTongDonHang = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
@@ -115,13 +120,13 @@ public class itf_ThongKe extends javax.swing.JInternalFrame {
 
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
 
-        jLabel34.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
-        jLabel34.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel34.setText("x");
+        jlbThanhCong.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        jlbThanhCong.setForeground(new java.awt.Color(255, 255, 255));
+        jlbThanhCong.setText("x");
 
-        jLabel35.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
-        jLabel35.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel35.setText("x");
+        jlbDaHuy.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        jlbDaHuy.setForeground(new java.awt.Color(255, 255, 255));
+        jlbDaHuy.setText("x");
 
         jlbTongDonHang.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jlbTongDonHang.setForeground(new java.awt.Color(255, 255, 255));
@@ -141,8 +146,8 @@ public class itf_ThongKe extends javax.swing.JInternalFrame {
                             .addComponent(jLabel7))
                         .addGap(10, 10, 10)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel35)
-                            .addComponent(jLabel34)))
+                            .addComponent(jlbDaHuy)
+                            .addComponent(jlbThanhCong)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                         .addComponent(jlbTongDonHang)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -163,11 +168,11 @@ public class itf_ThongKe extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jLabel34))
+                    .addComponent(jlbThanhCong))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(jLabel35))
+                    .addComponent(jlbDaHuy))
                 .addContainerGap(12, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -625,10 +630,10 @@ public class itf_ThongKe extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_rdHTBangActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-                
+
         Date ngayBd = dateNgayBatDau.getDateEditor().getDate();
-        JOptionPane.showMessageDialog(this,ngayBd);
-        
+        JOptionPane.showMessageDialog(this, ngayBd);
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
@@ -651,8 +656,6 @@ public class itf_ThongKe extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel34;
-    private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel39;
@@ -683,6 +686,8 @@ public class itf_ThongKe extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JLabel jlbDaHuy;
+    private javax.swing.JLabel jlbThanhCong;
     private javax.swing.JLabel jlbTongDonHang;
     private javax.swing.JPanel pnlDoanhThu;
     private javax.swing.JRadioButton rdHTBang;
