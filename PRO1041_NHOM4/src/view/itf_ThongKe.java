@@ -631,7 +631,7 @@ public class itf_ThongKe extends javax.swing.JInternalFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-        Date ngayBd = dateNgayBatDau.getDateEditor().getDate();
+        Date ngayBd = dateNgayBatDau.getDate();
         JOptionPane.showMessageDialog(this, ngayBd);
 
     }//GEN-LAST:event_jButton1ActionPerformed

@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
 
@@ -30,6 +31,19 @@ public class MaGiamGia {
 		this.ngayTao = ngayTao;
 		this.ngaySua = ngaySua;
 	}
+
+    public MaGiamGia(String maGiamGia, int soLuong, String menhGia, Date ngayBatDau, Date ngayKetThuc, int trangThai, Date ngayTao, Date ngaySua) {
+        this.maGiamGia = maGiamGia;
+        this.soLuong = soLuong;
+        this.menhGia = menhGia;
+        this.ngayBatDau = ngayBatDau;
+        this.ngayKetThuc = ngayKetThuc;
+        this.trangThai = trangThai;
+        this.ngayTao = ngayTao;
+        this.ngaySua = ngaySua;
+    }
+        
+        
 
 	public int getIdMaGiamGia() {
 		return idMaGiamGia;
@@ -123,6 +137,10 @@ public class MaGiamGia {
 				&& Objects.equals(ngayKetThuc, other.ngayKetThuc) && Objects.equals(ngaySua, other.ngaySua)
 				&& Objects.equals(ngayTao, other.ngayTao) && soLuong == other.soLuong && trangThai == other.trangThai;
 	}
+
+    public ArrayList<MaGiamGia> getAll() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 	
 
 }
